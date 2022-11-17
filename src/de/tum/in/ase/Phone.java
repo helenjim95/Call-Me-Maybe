@@ -11,6 +11,7 @@ public class Phone {
 
 
     public Phone(String brand, double price, boolean touchscreen) {
+        this.nextPhoneId += 1;
         this.id += 1;
         this.brand = brand;
         this.price = price;
@@ -50,5 +51,7 @@ public class Phone {
     }
 
     //TODO: Implement the toString method for the Phone class
-
+    public String toString() {
+        return "";
+    }
 }
