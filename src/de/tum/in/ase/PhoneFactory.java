@@ -37,6 +37,9 @@ public class PhoneFactory {
     }
     //TODO: Implement the removePhone method which removes the phone with the given id from the phoneList and returns the removed phone. If no phone with the given id exists, then follow the same rule in the findPhones method.
     public Phone removePhone(int id) {
+        if (id < 0) {
+            return new Phone("", -1, false);
+        }
         Phone phone = findPhone(id);
         phoneList.remove(phone);
         return phone;
@@ -67,6 +70,8 @@ public class PhoneFactory {
         }
         return phoneList;
     }
+
+//TODO: finish below!!
     //TODO: Implement findSmallestByLex method that returns the phone with the lexicographically smallest brand
 //    public Phone findSmallestByLex(List<Phone> phoneList) {
 //        return phoneList;
