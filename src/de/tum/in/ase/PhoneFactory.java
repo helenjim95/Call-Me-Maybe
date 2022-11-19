@@ -39,10 +39,15 @@ public class PhoneFactory {
     public Phone removePhone(int id) {
         if (id < 0) {
             return new Phone("", -1, false);
+        } else {
+            for (Phone phone : phoneList) {
+                if (phone.getId() == id) {
+                    phoneList.remove(phone);
+                    return phone;
+                }
+            }
+            return new Phone("", -1, false);
         }
-        Phone phone = findPhone(id);
-        phoneList.remove(phone);
-        return phone;
     }
     //TODO: Implement findTouchPhones method that iterates over the phoneList and store all touchscreen phones in a new list and return this list.
     public List<Phone> findTouchPhones() {
@@ -70,23 +75,72 @@ public class PhoneFactory {
         }
         return phoneList;
     }
+    
+    //Done: Implement findSmallestByLex method that returns the phone with the lexicographically smallest brand
+    public Phone findSmallestByLex(List<Phone> phoneList) {
+        return sortByBrand(phoneList).get(0);
+    }
 
-//TODO: finish below!!
-    //TODO: Implement findSmallestByLex method that returns the phone with the lexicographically smallest brand
-//    public Phone findSmallestByLex(List<Phone> phoneList) {
-//        return phoneList;
-//    }
-    //TODO: Implement sortByTouch that stores all the phones with a touchscreen in the beginning of a list, the rest of the phones at the end and return this list of phones.
-    public List<Phone> sortByPrice() {
-        return phoneList;
-    }
-    //TODO: Implement sortByBrand that sorts the phones lexicographically according to their brand and return a list of sorted phones.
+    //Done: Implement sortByTouch that stores all the phones with a touchscreen in the beginning of a list, the rest of the phones at the end and return this list of phones.
     public List<Phone> sortByTouch() {
-        List<Phone> outputList = new ArrayList<Phone>();
-        return phoneList;
+        LinkedList<Phone> copyPhoneList = new LinkedList<>(phoneList);
+        for (int i = 0; i < copyPhoneList.size(); i++) {
+            for (int j = i + 1; j < copyPhoneList.size(); j++) {
+                Phone phoneCurrent = copyPhoneList.get(i);
+                Phone phoneNext = copyPhoneList.get(j);
+                boolean isTouchscreenCurrent = phoneCurrent.isTouchscreen();
+                boolean isTouchscreenNext = phoneNext.isTouchscreen();
+//                Boolean.compare:
+                //0 if ‘a’ is equal to ‘b’,
+                //a negative value if ‘a’is false and ‘b’ is true,
+                //a positive value if ‘a’ is true and ‘b’ is false.
+                if (Boolean.compare(isTouchscreenCurrent, isTouchscreenNext)
+                        > 0) {
+                    copyPhoneList.add(phoneCurrent);
+                    Phone temp = phoneCurrent;
+                    copyPhoneList.set(i, phoneNext);
+                    copyPhoneList.set(j, phoneCurrent);
+                }
+            }
+        }
+        return copyPhoneList;
     }
-    //TODO: Implement sortByPrice that sorts the list of phones according to their price in increasing order and return the sorted list
-    public List<Phone> sortByBrand() {
-        return phoneList;
+    //Done: Implement sortByBrand that sorts the phones lexicographically according to their brand and return a list of sorted phones.
+    public List<Phone> sortByBrand(List<Phone> phones) {
+        for (int i = 0; i < phones.size(); i++) {
+            for (int j = i + 1; j < phones.size(); j++) {
+                Phone phoneCurrent = phones.get(i);
+                Phone phoneNext = phones.get(j);
+                String brandCurrent = phoneCurrent.getBrand();
+                String brandNext = phoneNext.getBrand();
+                if (brandCurrent.compareToIgnoreCase(brandNext)
+                        > 0) {
+                    Phone temp = phoneCurrent;
+                    phoneList.set(i, phoneNext);
+                    phoneList.set(j, phoneCurrent);
+                }
+            }
+        }
+        return phones;
+    }
+
+    //Done: Implement sortByPrice that sorts the list of phones according to their price in increasing order and return the sorted list
+    public List<Phone> sortByPrice() {
+        LinkedList<Phone> copyPhoneList = new LinkedList<>(phoneList);
+        for (int i = 0; i < copyPhoneList.size(); i++) {
+            for (int j = i + 1; j < copyPhoneList.size(); j++) {
+                Phone phoneCurrent = copyPhoneList.get(i);
+                Phone phoneNext = copyPhoneList.get(j);
+                double priceCurrent = phoneCurrent.getPrice();
+                double priceNext = phoneNext.getPrice();
+                if (Double.compare(priceCurrent, priceNext)
+                        > 0) {
+                    Phone temp = phoneCurrent;
+                    copyPhoneList.set(i, phoneNext);
+                    copyPhoneList.set(j, phoneCurrent);
+                }
+            }
+        }
+        return copyPhoneList;
     }
 }
