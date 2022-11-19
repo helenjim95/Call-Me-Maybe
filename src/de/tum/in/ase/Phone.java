@@ -1,17 +1,17 @@
 package de.tum.in.ase;
 
 public class Phone {
-    //TODO: Add nextPhoneId, id, brand, price, touchscreen attributes to the Phone class and implement the constructor with these attributes
-    public int nextPhoneId;
+    //Done: Add nextPhoneId, id, brand, price, touchscreen attributes to the Phone class and implement the constructor with these attributes
+    public static int nextPhoneId;
     private int id;
     private String brand;
     private double price;
     private boolean touchscreen;
-    //TODO: Implement getter and setter methods for the attributes id, brand, price, touchscreen
+    //Done: Implement getter and setter methods for the attributes id, brand, price, touchscreen
     private int count = 0;
     public Phone(String brand, double price, boolean touchscreen) {
         this.id = count;
-        this.nextPhoneId = this.id + 1;
+        nextPhoneId = this.id + 1;
         this.brand = brand;
         this.price = price;
         this.touchscreen = touchscreen;
@@ -50,7 +50,7 @@ public class Phone {
         this.touchscreen = touchscreen;
     }
 
-    //TODO: Implement the toString method for the Phone class
+    //Done: Implement the toString method for the Phone class
     public String toString() {
         return "";
     }
