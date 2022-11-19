@@ -10,7 +10,7 @@ public class Phone {
     private int count = 0;
     //Done: Implement getter and setter methods for the attributes id, brand, price, touchscreen
     public Phone(String brand, double price, boolean touchscreen) {
-        this.id += count;
+        this.id = count;
         this.brand = brand;
         this.price = price;
         this.touchscreen = touchscreen;
