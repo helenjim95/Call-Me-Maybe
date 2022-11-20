@@ -36,24 +36,17 @@ public class PhoneFactory {
     }
     //Done: Implement the removePhone method which removes the phone with the given id from the phoneList and returns the removed phone. If no phone with the given id exists, then follow the same rule in the findPhones method.
     public Phone removePhone(int id) {
-        try {
-            Phone phone = findPhone(id);
-            phoneList.remove(phone);
-            return phone;
-        } catch (Exception e) {
+        if (id < 0) {
+            return new Phone("", -1, false);
+        } else {
+            for (Phone phone : phoneList) {
+                if (phone.getId() == id & phone.getPrice() >= 0) {
+                    phoneList.remove(phone);
+                    return phone;
+                }
+            }
             return new Phone("", -1, false);
         }
-//        if (id < 0) {
-//            return new Phone("", -1, false);
-//        } else {
-//            for (Phone phone : phoneList) {
-//                if (phone.getId() == id) {
-//                    phoneList.remove(phone);
-//                    return phone;
-//                }
-//            }
-//            return new Phone("", -1, false);
-//        }
     }
     //Done: Implement findTouchPhones method that iterates over the phoneList and store all touchscreen phones in a new list and return this list.
     public List<Phone> findTouchPhones() {
