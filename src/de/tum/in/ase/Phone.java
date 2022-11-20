@@ -3,7 +3,7 @@ package de.tum.in.ase;
 public class Phone {
     //Done: Add nextPhoneId, id, brand, price, touchscreen attributes to the Phone class and implement the constructor with these attributes
     public static int nextPhoneId = 0;
-    private int id = -1;
+    private int id;
     private String brand;
     private double price;
     private boolean touchscreen;
